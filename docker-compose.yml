@@ -1,0 +1,9 @@
+services:
+  victim-h2:
+    build: ./node-app
+    ports:
+      - "443:443"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
