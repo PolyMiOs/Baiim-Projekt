@@ -2,39 +2,34 @@
 
 ## 1. Cel zajęć
 Celem laboratorium jest praktyczne zrozumienie ataków typu DoS w różnych warstwach modelu OSI:
-* **Warstwa 4 (Transportowa):** Atak SYN Flood wykorzystujący luki w protokole TCP.
-* **Warstwa 7 (Aplikacji):** Atak HTTP Flood celujący w zasoby procesora (CPU Bound).
+* **Warstwa 4 (Transportowa):** Atak SYN Flood (TCP).
+* **Warstwa 7 (Aplikacji):** Atak HTTP Flood (Resource Exhaustion).
 
 ---
 
-## 2. Przygotowanie środowiska (Ofiara)
+## 2. Środowisko (Serwer Ofiary)
 
-Serwer został napisany w Node.js (Express), aby zademonstrować architekturę jednowątkową (Event Loop), która jest szczególnie podatna na blokowanie.
+Serwer pracuje w środowisku Python (Flask). Twoim zadaniem jest zaobserwowanie, jak pojedynczy proces serwera radzi sobie z nadmiarem zapytań.
 
-### Kroki wstępne:
-1. Zainstaluj bibliotekę Express:  
-   `npm install express`
-2. Zapisz poniższy kod jako `server.js` i uruchom:  
-   `node server.js`
+**Kod serwera (`server.py`):**
+```python
+from flask import Flask
+import hashlib
 
-```javascript
-const express = require('express');
-const crypto = require('crypto');
-const app = express();
+app = Flask(__name__)
 
-app.get('/', (req, res) => {
-    res.send("Serwer działa poprawnie! (Strona lekka)");
-});
+@app.route('/')
+def home():
+    return "Serwer dziala! Sprobuj mnie powalic na /heavy."
 
-app.get('/heavy', (req, res) => {
-    let data = "test_data";
-    // Symulacja ciężkiego zadania CPU (haszowanie)
-    for (let i = 0; i < 200000; i++) {
-        data = crypto.createHash('sha256').update(data).digest('hex');
-    }
-    res.send("Obliczenia zakończone.");
-});
+@app.route('/heavy')
+def heavy_task():
+    data = "some_random_data_to_hash"
+    # Symulacja ciężkiej pracy procesora
+    for _ in range(100_000):
+        data = hashlib.sha256(data.encode()).hexdigest()
+    return f"Operacja zakonczona."
 
-app.listen(8080, '0.0.0.0', () => {
-    console.log("Serwer ofiary nasłuchuje na porcie 8080...");
-});
+if __name__ == '__main__':
+    # threaded=False sprawia, że serwer przetwarza tylko 1 żądanie na raz
+    app.run(host='0.0.0.0', port=8080, threaded=False)
