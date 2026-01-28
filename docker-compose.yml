@@ -11,6 +11,10 @@ services:
     build: ./flask-app
     ports:
       - "8080:8080"
+    privileged: true 
+    sysctls:
+      - net.ipv4.tcp_syncookies=0
+      - net.ipv4.tcp_max_syn_backlog=128 # Small backlog makes the attack visible faster
     deploy:
       resources:
         limits:
