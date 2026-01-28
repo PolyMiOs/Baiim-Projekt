@@ -11,8 +11,6 @@ const server = http2.createSecureServer({
   maxSessionMemory: 100,
 });
 
-const EVIL_REGEX = /^([a-zA-Z0-9]+\s?)+$/;
-
 // prevent server crashing with error catching
 server.on("error", (err) => console.error("Server Error:", err));
 server.on("sessionError", (err) => console.error("Session Error:", err));
@@ -31,12 +29,10 @@ server.on("stream", (stream, headers) => {
       let errorMsg = "";
 
       try {
-        // --- THE VULNERABILITY ---
-        // We create a Regex object directly from user input.
-        // This is extremely dangerous if the user provides an "Evil Regex".
+        // create a Regex object from user input
         const userRegex = new RegExp(body, "i");
 
-        // We use the regex to filter the poem lines
+        // use the regex to filter the lines
         matches = poemLines.filter((line) => userRegex.test(line));
       } catch (e) {
         errorMsg = "Invalid Regular Expression.";
