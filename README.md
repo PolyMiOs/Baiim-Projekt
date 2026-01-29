@@ -79,9 +79,7 @@ Więcej informacji można znaleźć [tutaj](https://owasp.org/www-community/atta
 
 <details>
     <summary> Rozwiązanie zadania </summary>
-    ```regex
     ^(([a-z ])+)+$
-    ```
 </details>
 
 ## Zadanie 4: Rapid reset
