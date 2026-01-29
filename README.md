@@ -66,7 +66,8 @@ Więcej informacji można znaleźć [tutaj](https://www.cloudflare.com/learning/
 | Skrypt do uzupełnienia | `lownslow.py` |
 
 
-Tym razem, zastosujemy metodę **low and slow**. Ataki tego typu wymierzone są w serwery oparte na wątkach. Mają one na celu wszystkich wątków powolnymi żadaniami, przesyłając bajt po bajcie. W ten sposób, połączenie jest ciągle zajęte przez pojedynczego hosta.
+Tym razem, zastosujemy metodę **low and slow**. Ataki tego typu wymierzone są w serwery oparte na wątkach. Mają one na celu zajęcie wszystkich wątków powolnymi żądaniami,
+przesyłając bajt po bajcie. W ten sposób, połączenie jest ciągle zajęte przez pojedynczego hosta.
 
 Warto zwrócić uwagę na statystyki kontenera. Czy serwer jest w stanie obsłużyć żądania? Na jakim poziomie zużycia procesora pracuje?
 
