@@ -46,8 +46,11 @@ Należy pamiętać, że **nie wszystkie zadania zakładają całkowite przytłoc
 
 ## Zadanie 1: HTTP flood
 
-Atakowany serwer: `127.0.0.1:8000`
-Skrypt do uzupełnienia: `http_flood_attack.py`
+
+| Atakowany serwer | 127.0.0.1:8000 |
+| -------------- | --------------- |
+| Skrypt do uzupełnienia | http_flood_attack.py |
+
 
 Wiemy, że wskazany serwer wykonuje pewne ciężkie operacje pod endpointem `/heavy`. Twoim zadaniem jest zwykłe zasypanie go taką ilością żądań, która całkowicie zablokuje jego funkcjonowanie.
 
@@ -56,8 +59,11 @@ Więcej informacji można znaleźć [tutaj](https://www.cloudflare.com/learning/
 
 ## Zadanie 2: Low and slow
 
-Atakowany serwer: `127.0.0.1:8000`
-Skrypt do uzupełnienia: `lownslow.py`
+
+| Atakowany serwer | 127.0.0.1:8000 |
+| -------------- | --------------- |
+| Skrypt do uzupełnienia | lownslow.py |
+
 
 Tym razem, zastosujemy metodę **low and slow**. Ataki tego typu wymierzone są w serwery oparte na wątkach. Mają one na celu wszystkich wątków powolnymi żadaniami, przesyłając bajt po bajcie. W ten sposób, połączenie jest ciągle zajęte przez pojedynczego hosta.
 
@@ -67,8 +73,11 @@ Więcej informacji można znaleźć [tutaj](https://www.cloudflare.com/learning/
 
 ## Zadanie 3: ReDos
 
-Atakowany serwer: `https://127.0.0.1`
-Komenda do użycia: `curl -k -X POST -d "<regex>" https://127.0.0.1/search`
+
+| Atakowany serwer | https://127.0.0.1 |
+| -------------- | --------------- |
+| Komenda do użycia | curl -k -X POST -d "<regex>" https://127.0.0.1/search |
+
 
 Operacje wykonywane po stronie serwera są z perspektywy użytkownika bardzo wygodne - strona powinna ładować się szybciej na słabszych komputerach. W takim wypadku nie należy jednak zapominać o bezpieczeństwie, w szczególności w wypadku, w którym dane wejściowe użytkownika mają wpływ na żłożoność algorytmiczną zadań.
 
@@ -84,8 +93,11 @@ Więcej informacji można znaleźć [tutaj](https://owasp.org/www-community/atta
 
 ## Zadanie 4: Rapid reset
 
-Atakowany serwer: `https://127.0.0.1`
-Skrypt do uzupełnienia: `rapidreset.py`
+
+| Atakowany serwer | https://127.0.0.1 |
+| -------------- | --------------- |
+| Skrypt do uzupełnienia | rapidreset.py |
+
 
 Po wstępnym zebraniu informacji, dowiedziałeś/aś się, że serwer HTTP/2 pracuje na nodejs w wersji 18.15.
 Jest on zatem podatny na ataki typu [rapid reset](https://www.cve.org/CVERecord?id=CVE-2023-44487)
